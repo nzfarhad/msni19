@@ -56,7 +56,7 @@ msni<-function(education_lsg,
   assertthat::assert_that(typeof(protection_lsg) %in% c("numeric","double", "integer"), msg =('protection_lsg a numeric vector'))
   assertthat::assert_that(typeof(capacity_gaps) %in% c("numeric","double", "integer"), msg =('capacity_gaps must be a numeric vector'))
   assertthat::assert_that(typeof(wash_lsg) %in% c("numeric","double", "integer"), msg =('wash_lsg must be numeric'))
-  assertthat::assert_that(typeof(impact) %in% c("numeric","double", "integer"), msg =('wash_lsg must be numeric'))
+  assertthat::assert_that(typeof(impact) %in% c("numeric","double", "integer"), msg =('impact must be numeric'))
 
 
   custom_input_indices<-list(...)
@@ -117,6 +117,4 @@ msni<-function(education_lsg,
   #
   # done!
   msni
-  }
-
-
+}
