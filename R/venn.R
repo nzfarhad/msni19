@@ -12,7 +12,7 @@
 #'
 #' @importFrom dplyr summarize_all mutate_all transmute select
 #' @importFrom rlang !! sym
-#' @importFrom eulerr euler plot.euler
+#' @importFrom eulerr euler
 #'
 #' @export
 venn_msni <- function(df,
