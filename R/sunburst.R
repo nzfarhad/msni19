@@ -43,7 +43,7 @@ sunburst <- function(df, cols, labels, parents, weights = NULL, colors, na.rm = 
 #' @param impact_branch if TRUE, displays 3rd layer of impact branch
 #'
 #' @importFrom dplyr filter transmute mutate mutate_at
-#' @importFrom rlang `!!` sym
+#' @importFrom rlang !! sym
 #'
 #' @export
 sunburst_msni <- function(df,
