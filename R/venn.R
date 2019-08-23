@@ -10,7 +10,7 @@
 #' @param capacity_gaps column name for capacity/coping index
 #' @param weights column name for weights column in dataset
 #'
-#' @importFrom dplyr summarize_all mutate_all transmute select
+#' @importFrom dplyr summarize_all mutate_all transmute select replace_na
 #' @importFrom rlang !! sym
 #' @importFrom eulerr euler
 #'
