@@ -25,7 +25,7 @@ sunburst <- function(df, cols, labels, parents, weights = NULL, colors, na.rm = 
     layout(colorway = colors)
 }
 
-#' Create sunburst for MSNI
+#' Create sunburst for MSNI components
 #'
 #' @param df MSNA data
 #' @param msni column name for MSNI

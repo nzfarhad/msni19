@@ -2,7 +2,7 @@
 % Please edit documentation in R/sunburst.R
 \name{sunburst_msni}
 \alias{sunburst_msni}
-\title{Create sunburst for MSNI}
+\title{Create sunburst for MSNI components}
 \usage{
 sunburst_msni(df, msni = "msni", fsl_lsg = "fsl_lsg",
   health_lsg = "health_lsg", protection_lsg = "protection_lsg",
@@ -41,5 +41,5 @@ sunburst_msni(df, msni = "msni", fsl_lsg = "fsl_lsg",
 \item{health_prot_shelter_branch}{if TRUE, displays 3rd branch layer for H/P/S scores}
 }
 \description{
-Create sunburst for MSNI
+Create sunburst for MSNI components
 }
