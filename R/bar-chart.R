@@ -11,7 +11,7 @@
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
 #'
-#' @importFrom dplyr filter group_by summarize mutate
+#' @importFrom dplyr filter group_by summarize mutate n
 #' @importFrom rlang !! sym
 #' @importFrom forcats fct_rev
 #' @importFrom ggplot2 ggplot aes theme_minimal labs scale_fill_manual scale_y_continuous scale_x_discrete ggsave coord_flip
