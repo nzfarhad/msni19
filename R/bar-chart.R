@@ -47,6 +47,8 @@ group_severity <- function(df,
   if (index_max == 5) {
     index_fill <- c("#EE5A59", index_fill)
     index_labels <- c("Extreme+ (4+)", index_labels)
+  } else {
+    data <- filter(data, score != "index_4_plus")
   }
 
   p <- ggplot(data = data, aes(x = !!sym(group), y = percent)) +
