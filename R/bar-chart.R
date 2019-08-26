@@ -16,7 +16,7 @@
 #' @importFrom rlang !! sym
 #' @importFrom forcats fct_rev
 #' @importFrom tidyr gather
-#' @importFrom ggplot2 ggplot aes theme_minimal labs scale_fill_manual scale_y_continuous scale_x_discrete ggsave coord_flip
+#' @importFrom ggplot2 ggplot aes theme_minimal labs scale_fill_manual scale_y_continuous scale_x_discrete ggsave coord_flip geom_bar
 #'
 #' @export
 severity_bar_chart <- function(df,
