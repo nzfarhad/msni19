@@ -5,8 +5,9 @@
 \title{Create sunburst for MSNI components}
 \usage{
 severity_bar_chart(df, group = "group", group_order = NULL,
-  group_labels = NULL, index = "msni", index_max = 5,
-  weights = NULL, plot_name = "group_severity.pdf", path = "")
+  group_labels = NULL, index = "msni", index_max = 4,
+  index_type = "msni", weights = NULL,
+  plot_name = "group_severity.pdf", path = "")
 }
 \arguments{
 \item{df}{MSNA data}
@@ -20,6 +21,8 @@ severity_bar_chart(df, group = "group", group_order = NULL,
 \item{index}{column name for scoring index to graph with}
 
 \item{index_max}{max value index can take, either 4 or 5}
+
+\item{index_type}{character vector specifying either "msni" or "lsg", to determine labels on scores}
 
 \item{weights}{column name for weights column in dataset}
 
