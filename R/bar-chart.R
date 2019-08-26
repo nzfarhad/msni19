@@ -29,15 +29,20 @@ severity_bar_chart <- function(df,
                            weights = NULL,
                            plot_name = "group_severity.pdf",
                            path = "") {
+  if (is.null(weights)) {
+    df$weights <- rep(1, nrow(df))
+  } else {
+    df$weights <- df[[weights]]
+  }
 
   data <- df %>%
     group_by(!!sym(group)) %>%
     filter(!is.na(!!sym(index))) %>%
-    summarize(index_1 = 100 * sum(!!sym(index) == 1) / n(),
-              index_2 = 100 * sum(!!sym(index) == 2) / n(),
-              index_3 = 100 * sum(!!sym(index) == 3) / n(),
-              index_4 = 100 * sum(!!sym(index) == 4) / n(),
-              index_4_plus = 100 * sum(msni_nga > 4) / n()) %>%
+    summarize(index_1 = 100 * sum((!!sym(index) == 1) * weights) / sum(weights)),
+              index_2 = 100 * sum((!!sym(index) == 2) * weights) / sum(weights)),
+              index_3 = 100 * sum((!!sym(index) == 3) * weights) / sum(weights)),
+              index_4 = 100 * sum((!!sym(index) == 4) * weights) / sum(weights)),
+              index_4_plus = sum((!!sym(index) > 4) * weights) / sum(weights))) %>%
     gather("score", "percent", -!!sym(group))
 
   if (!is.null(group_order)) {
@@ -78,5 +83,4 @@ severity_bar_chart <- function(df,
 
   p + coord_flip() +
     ggsave("test.pdf", path = "graphs", height = length(unique(df[[group]])))
-
 }
