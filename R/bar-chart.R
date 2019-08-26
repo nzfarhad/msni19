@@ -38,11 +38,11 @@ severity_bar_chart <- function(df,
   data <- df %>%
     group_by(!!sym(group)) %>%
     filter(!is.na(!!sym(index))) %>%
-    summarize(index_1 = 100 * sum((!!sym(index) == 1) * weights) / sum(weights)),
-              index_2 = 100 * sum((!!sym(index) == 2) * weights) / sum(weights)),
-              index_3 = 100 * sum((!!sym(index) == 3) * weights) / sum(weights)),
-              index_4 = 100 * sum((!!sym(index) == 4) * weights) / sum(weights)),
-              index_4_plus = sum((!!sym(index) > 4) * weights) / sum(weights))) %>%
+    summarize(index_1 = 100 * sum((!!sym(index) == 1) * weights) / sum(weights),
+              index_2 = 100 * sum((!!sym(index) == 2) * weights) / sum(weights),
+              index_3 = 100 * sum((!!sym(index) == 3) * weights) / sum(weights),
+              index_4 = 100 * sum((!!sym(index) == 4) * weights) / sum(weights),
+              index_4_plus = sum((!!sym(index) > 4) * weights) / sum(weights)) %>%
     gather("score", "percent", -!!sym(group))
 
   if (!is.null(group_order)) {
