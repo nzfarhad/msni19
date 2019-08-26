@@ -7,6 +7,7 @@
 #' @param group_labels character vector of labels for graph
 #' @param index column name for scoring index to graph with
 #' @param index_max max value index can take, either 4 or 5
+#' @param index_type character vector specifying either "msni" or "lsg", to determine labels on scores
 #' @param weights column name for weights column in dataset
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
@@ -14,15 +15,17 @@
 #' @importFrom dplyr filter group_by summarize mutate n
 #' @importFrom rlang !! sym
 #' @importFrom forcats fct_rev
+#' @importFrom tidyr gather
 #' @importFrom ggplot2 ggplot aes theme_minimal labs scale_fill_manual scale_y_continuous scale_x_discrete ggsave coord_flip
 #'
 #' @export
-group_severity <- function(df,
+severity_bar_chart <- function(df,
                            group = "group",
                            group_order = NULL,
                            group_labels = NULL,
                            index = "msni",
-                           index_max = 5,
+                           index_max = 4,
+                           index_type = "msni",
                            weights = NULL,
                            plot_name = "group_severity.pdf",
                            path = "") {
@@ -42,11 +45,21 @@ group_severity <- function(df,
   }
 
   index_fill <- c("#F7ACAC", "#FACDCD", "#A7A9AC", "#58585A")
-  index_labels <- c("Extreme (4)", "Severe (3)", "Stress (2)", "Minimal (1)")
+  if (index_type == "msni") {
+    index_labels <- c("Extreme (4)", "Severe (3)", "Stress (2)", "Minimal (1)")
+  } else {
+    index_labels <- c("Extreme", "Severe", "Stress", "Minimal")
+  }
+
 
   if (index_max == 5) {
     index_fill <- c("#EE5A59", index_fill)
-    index_labels <- c("Extreme+ (4+)", index_labels)
+    if (index_type == "msni") {
+      index_labels <- c("Extreme+ (4+)", index_labels)
+    } else {
+      index_labels <- c("Catastrophic", index_labels)
+    }
+
   } else {
     data <- filter(data, score != "index_4_plus")
   }
