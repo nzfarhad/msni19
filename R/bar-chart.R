@@ -81,6 +81,6 @@ severity_bar_chart <- function(df,
     p <- p + scale_x_discrete(labels = group_labels)
   }
 
-  p + coord_flip() +
-    ggsave("test.pdf", path = "graphs", height = length(unique(df[[group]])))
+  p <- p + coord_flip()
+  ggsave(plot_name, plot = p, path = path, height = length(unique(df[[group]])))
 }
