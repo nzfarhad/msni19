@@ -27,8 +27,8 @@ severity_bar_chart <- function(df,
                            index_max = 4,
                            index_type = "msni",
                            weights = NULL,
-                           plot_name = "group_severity.pdf",
-                           path = "") {
+                           plot_name = "severity_bars.pdf",
+                           path = NULL) {
   if (is.null(weights)) {
     df$weights <- rep(1, nrow(df))
   } else {
