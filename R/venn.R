@@ -54,10 +54,12 @@ venn_msni <- function(df,
       plot_name <- paste(path, plot_name, sep = "/")
     }
     pdf(paste0(plot_name, ".pdf"))
-    plot(fit,
+    p <- plot(fit,
          fills = list(fill = c("#EE5859", "#D1D3D4")),
          labels = F)
+    print(p)
     dev.off()
+    p
   } else {
     plot(fit,
          fills = list(fill = c("#EE5859", "#D1D3D4")),
