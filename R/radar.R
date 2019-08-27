@@ -12,6 +12,7 @@
 #' @importFrom purrr map_df
 #' @importFrom rlang !! sym
 #' @importFrom ggradar ggradar
+#' @importFrom tidyr nest
 #'
 #' @export
 radar_graph <- function(df,
