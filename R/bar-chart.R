@@ -1,5 +1,5 @@
 
-#' Create sunburst for MSNI components
+#' Create stacked bar chart of severity scores for MSNI or other indices
 #'
 #' @param df MSNA data
 #' @param group column name to group data by, e.g. population type

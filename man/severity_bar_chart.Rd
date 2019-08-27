@@ -2,7 +2,7 @@
 % Please edit documentation in R/bar-chart.R
 \name{severity_bar_chart}
 \alias{severity_bar_chart}
-\title{Create sunburst for MSNI components}
+\title{Create stacked bar chart of severity scores for MSNI or other indices}
 \usage{
 severity_bar_chart(df, group = "group", group_order = NULL,
   group_labels = NULL, index = "msni", index_max = 4,
@@ -31,5 +31,5 @@ severity_bar_chart(df, group = "group", group_order = NULL,
 \item{path}{path to save plot to if not in current working directory}
 }
 \description{
-Create sunburst for MSNI components
+Create stacked bar chart of severity scores for MSNI or other indices
 }
