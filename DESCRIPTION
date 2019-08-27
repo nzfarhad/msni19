@@ -22,7 +22,8 @@ Imports:
     plotly,
     forcats,
     tidyr,
-    ggplot2
+    ggplot2,
+    stringr
 Suggests:
     testthat,
     knitr,

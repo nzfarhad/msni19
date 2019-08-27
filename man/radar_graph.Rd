@@ -9,7 +9,7 @@ radar_graph(df, lsg = c("education_lsg", "shelter_lsg", "fsl_lsg",
   lsg_labels = c("Education in\\nEmergency",
   "Emergency Shelter\\nand NFI", "Food Security and\\nAgriculture",
   "Health", "Nutrition", "Protection", "WASH"), group = NULL,
-  group_labels = NULL, weighting_function = NULL,
+  group_order = NULL, group_labels = NULL, weighting_function = NULL,
   legend_position = "right", legend_text_size = 10,
   label_text_size = 4, print_plot = F, plot_name = "radar_graph",
   path = NULL)
@@ -23,7 +23,9 @@ radar_graph(df, lsg = c("education_lsg", "shelter_lsg", "fsl_lsg",
 
 \item{group}{column name to group data by, e.g. population type}
 
-\item{group_labels}{character vector of labels for graph}
+\item{group_order}{character vector of how to order the graph, defaults to alphabetical ordering}
+
+\item{group_labels}{character vector of labels for graph, make sure they match the order for the data}
 
 \item{weighting_function}{weighting function used to weight MSNA dataset}
 
