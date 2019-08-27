@@ -82,6 +82,7 @@ radar_graph <- function(df,
   if (print_plot) {
     ggsave(paste0(plot_name, ".pdf"), p, path = path)
   }
+  p
 }
 
 #' Function to calculate percent for index with custom weighting
