@@ -134,7 +134,7 @@ sunburst_msni <- function(df,
     if (!is.null(path)) {
       plot_name <- paste(path, plot_name, sep = "/")
     }
-    plot_name <- pdf(paste0(plot_name, ".pdf"))
+    plot_name <- paste0(plot_name, ".pdf")
     orca(p, plot_name)
   }
 
