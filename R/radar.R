@@ -6,12 +6,19 @@
 #' @param group column name to group data by, e.g. population type
 #' @param group_labels character vector of labels for graph
 #' @param weighting_function weighting function used to weight MSNA dataset
+#' @param legend_position character specifying legend location, either "top", "left", "right", or "bottom"
+#' @param legend_text_size integer specifying size of legend text
+#' @param label_text_size integer specifying size of label text
+#' @param print_plot logical column indicating whether or not to save the plot to PDF
+#' @param plot_name name to save plot with
+#' @param path path to save plot to if not in current working directory
 #'
 #' @importFrom dplyr filter transmute mutate mutate_at summarize_at rename bind_cols group_by
 #' @importFrom tibble add_column
 #' @importFrom purrr map_df
 #' @importFrom rlang !! sym
 #' @importFrom ggradar ggradar
+#' @importFrom ggplot2 ggsave
 #' @importFrom tidyr nest
 #'
 #' @export
@@ -33,7 +40,12 @@ radar_graph <- function(df,
                         group = NULL,
                         group_labels = NULL,
                         weighting_function = NULL,
-                        legend_position = "right") {
+                        legend_position = "right",
+                        legend_text_size = 10,
+                        label_text_size = 4,
+                        print_plot = F,
+                        plot_name = "radar_graph",
+                        path = NULL) {
 
   if (!is.null(group)) {
     df <- group_by(df, !! sym(group)) %>% nest()
@@ -50,14 +62,17 @@ radar_graph <- function(df,
       add_column(group = "", .before = 1)
   }
 
-  ggradar(data,
-          axis.labels = lsg_labels,
-          axis.label.size = 4,
-          background.circle.transparency = 0.1,
-          group.point.size = 3,
-          legend.position = legend_position,
-          legend.text.size = 10)
+  p <- ggradar(data,
+               axis.labels = lsg_labels,
+               axis.label.size = label_text_size,
+               background.circle.transparency = 0.1,
+               group.point.size = 3,
+               legend.position = legend_position,
+               legend.text.size = legend_text_size)
 
+  if (print_plot) {
+    ggsave(paste0(plot_name, ".pdf"), p, path = path)
+  }
 }
 
 #' Function to calculate percent for index with custom weighting

@@ -9,6 +9,9 @@
 #' @param education_lsg column name for education index
 #' @param capacity_gaps column name for capacity/coping index
 #' @param weights column name for weights column in dataset
+#' @param print_plot logical column indicating whether or not to save the plot to PDF
+#' @param plot_name name to save plot with
+#' @param path path to save plot to if not in current working directory
 #'
 #' @importFrom dplyr summarize_all mutate_all transmute select
 #' @importFrom tidyr replace_na
@@ -24,7 +27,10 @@ venn_msni <- function(df,
                       wash_lsg = "wash_lsg",
                       education_lsg = "education_lsg",
                       capacity_gaps = "capacity_gaps",
-                      weights = NULL) {
+                      weights = NULL,
+                      print_plot = F,
+                      plot_name = "venn",
+                      path = NULL) {
 
   lsg_cols <- c(fsl_lsg, health_lsg, protection_lsg, shelter_lsg, wash_lsg, education_lsg)
   data <- df %>%
@@ -43,7 +49,18 @@ venn_msni <- function(df,
   data <- summarize_all(data, sum)
   data <- as.numeric(unlist(data))
   fit <- euler(c("A" = data[1], "B" = data[2], "A&B" = data[3]))
-  plot(fit,
-       fills = list(fill = c("#EE5859", "#D1D3D4")),
-       labels = F)
+  if (print_plot) {
+    if (!is.null(path)) {
+      plot_name <- paste(path, plot_name, sep = "/")
+    }
+    pdf(paste0(plot_name, ".pdf"))
+    plot(fit,
+         fills = list(fill = c("#EE5859", "#D1D3D4")),
+         labels = F)
+    dev.off()
+  } else {
+    plot(fit,
+         fills = list(fill = c("#EE5859", "#D1D3D4")),
+         labels = F)
+  }
 }

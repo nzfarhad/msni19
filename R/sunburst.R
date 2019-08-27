@@ -41,9 +41,13 @@ sunburst <- function(df, cols, labels, parents, weights = NULL, colors, na.rm = 
 #' @param fsl_wash_branch if TRUE, displays 3rd branch layer of FSL/WASH scores
 #' @param health_prot_shelter_branch if TRUE, displays 3rd branch layer for H/P/S scores
 #' @param impact_branch if TRUE, displays 3rd layer of impact branch
+#' @param print_plot logical column indicating whether or not to save the plot to PDF
+#' @param plot_name name to save plot with
+#' @param path path to save plot to if not in current working directory
 #'
 #' @importFrom dplyr filter transmute mutate mutate_at
 #' @importFrom rlang !! sym
+#' @importFrom plotly orca
 #'
 #' @export
 sunburst_msni <- function(df,
@@ -59,7 +63,10 @@ sunburst_msni <- function(df,
                           weights = NULL,
                           fsl_wash_branch = F,
                           health_prot_shelt_branch = F,
-                          impact_branch = F) {
+                          impact_branch = F,
+                          print_plot = F,
+                          plot_name = "sunburst",
+                          path = NULL) {
 
   data <- df %>% filter(!!sym(msni) %in% msni_filter) %>%
     transmute(msni = rep(1, nrow(.)),
@@ -115,11 +122,21 @@ sunburst_msni <- function(df,
     parents <- c(parents, rep("impact_total", 3))
   }
 
-  sunburst(data,
+  p <- sunburst(data,
            cols = cols,
            labels = labels,
            parents = parents,
            weights = weights,
            colors = colors,
            na.rm = T)
+
+  if (print_plot) {
+    if (!is.null(path)) {
+      plot_name <- paste(path, plot_name, sep = "/")
+    }
+    plot_name <- pdf(paste0(plot_name, ".pdf"))
+    orca(p, plot_name)
+  }
+
+  p
 }

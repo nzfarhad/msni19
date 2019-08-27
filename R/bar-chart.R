@@ -9,6 +9,7 @@
 #' @param index_max max value index can take, either 4 or 5
 #' @param index_type character vector specifying either "msni" or "lsg", to determine labels on scores
 #' @param weights column name for weights column in dataset
+#' @param print_plot Logical column indicating whether or not to save the plot to PDF
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
 #'
@@ -27,6 +28,7 @@ severity_bar_chart <- function(df,
                            index_max = 4,
                            index_type = "msni",
                            weights = NULL,
+                           print_plot = F,
                            plot_name = "severity_bar_chart",
                            path = NULL) {
   if (is.null(weights)) {
@@ -82,6 +84,10 @@ severity_bar_chart <- function(df,
   }
 
   p <- p + coord_flip()
-  ggsave(paste0(plot_name, ".pdf"), plot = p, path = path, height = length(unique(df[[group]])))
+
+  if (print_plot) {
+    ggsave(paste0(plot_name, ".pdf"), plot = p, path = path, height = length(unique(df[[group]])))
+  }
+
   p
 }
