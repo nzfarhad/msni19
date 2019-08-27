@@ -6,8 +6,7 @@
 \usage{
 severity_bar_chart(df, group = "group", group_order = NULL,
   group_labels = NULL, index = "msni", index_max = 4,
-  index_type = "msni", weights = NULL,
-  plot_name = "group_severity.pdf", path = "")
+  index_type = "msni", weights = NULL)
 }
 \arguments{
 \item{df}{MSNA data}
@@ -25,10 +24,6 @@ severity_bar_chart(df, group = "group", group_order = NULL,
 \item{index_type}{character vector specifying either "msni" or "lsg", to determine labels on scores}
 
 \item{weights}{column name for weights column in dataset}
-
-\item{plot_name}{name to save plot with}
-
-\item{path}{path to save plot to if not in current working directory}
 }
 \description{
 Create sunburst for MSNI components

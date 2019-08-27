@@ -9,14 +9,12 @@
 #' @param index_max max value index can take, either 4 or 5
 #' @param index_type character vector specifying either "msni" or "lsg", to determine labels on scores
 #' @param weights column name for weights column in dataset
-#' @param plot_name name to save plot with
-#' @param path path to save plot to if not in current working directory
 #'
 #' @importFrom dplyr filter group_by summarize mutate n
 #' @importFrom rlang !! sym
 #' @importFrom forcats fct_rev
 #' @importFrom tidyr gather
-#' @importFrom ggplot2 ggplot aes theme_minimal labs scale_fill_manual scale_y_continuous scale_x_discrete ggsave coord_flip geom_bar
+#' @importFrom ggplot2 ggplot aes theme_minimal labs scale_fill_manual scale_y_continuous scale_x_discrete coord_flip geom_bar
 #'
 #' @export
 severity_bar_chart <- function(df,
@@ -26,9 +24,7 @@ severity_bar_chart <- function(df,
                            index = "msni",
                            index_max = 4,
                            index_type = "msni",
-                           weights = NULL,
-                           plot_name = "severity_bars.pdf",
-                           path = NULL) {
+                           weights = NULL) {
   if (is.null(weights)) {
     df$weights <- rep(1, nrow(df))
   } else {
@@ -81,6 +77,5 @@ severity_bar_chart <- function(df,
     p <- p + scale_x_discrete(labels = group_labels)
   }
 
-  p <- p + coord_flip()
-  ggsave(plot_name, plot = p, path = path, height = length(unique(df[[group]])))
+  p + coord_flip()
 }
