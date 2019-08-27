@@ -16,9 +16,16 @@ Imports:
     dplyr,
     purrr,
     kableExtra,
-    assertthat
+    assertthat,
+    rlang,
+    eulerr,
+    plotly,
+    forcats,
+    tidyr,
+    ggplot2
 Suggests: 
     testthat,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Remotes: ricardo-bion/ggradar
