@@ -9,7 +9,8 @@ sunburst_msni(df, msni = "msni", fsl_lsg = "fsl_lsg",
   shelter_lsg = "shelter_lsg", wash_lsg = "wash_lsg",
   capacity_gaps = "capacity_gaps", impact = "impact",
   msni_filter = c(3, 4, 5), weights = NULL, fsl_wash_branch = F,
-  health_prot_shelt_branch = F, impact_branch = F)
+  health_prot_shelt_branch = F, impact_branch = F, print_plot = F,
+  plot_name = "sunburst", path = NULL)
 }
 \arguments{
 \item{df}{MSNA data}
@@ -37,6 +38,12 @@ sunburst_msni(df, msni = "msni", fsl_lsg = "fsl_lsg",
 \item{fsl_wash_branch}{if TRUE, displays 3rd branch layer of FSL/WASH scores}
 
 \item{impact_branch}{if TRUE, displays 3rd layer of impact branch}
+
+\item{print_plot}{logical column indicating whether or not to save the plot to PDF}
+
+\item{plot_name}{name to save plot with}
+
+\item{path}{path to save plot to if not in current working directory}
 
 \item{health_prot_shelter_branch}{if TRUE, displays 3rd branch layer for H/P/S scores}
 }

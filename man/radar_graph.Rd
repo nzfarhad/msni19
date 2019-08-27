@@ -10,7 +10,9 @@ radar_graph(df, lsg = c("education_lsg", "shelter_lsg", "fsl_lsg",
   "Emergency Shelter\\nand NFI", "Food Security and\\nAgriculture",
   "Health", "Nutrition", "Protection", "WASH"), group = NULL,
   group_labels = NULL, weighting_function = NULL,
-  legend_position = "right")
+  legend_position = "right", legend_text_size = 10,
+  label_text_size = 4, print_plot = F, plot_name = "radar_graph",
+  path = NULL)
 }
 \arguments{
 \item{df}{MSNA data}
@@ -24,6 +26,18 @@ radar_graph(df, lsg = c("education_lsg", "shelter_lsg", "fsl_lsg",
 \item{group_labels}{character vector of labels for graph}
 
 \item{weighting_function}{weighting function used to weight MSNA dataset}
+
+\item{legend_position}{character specifying legend location, either "top", "left", "right", or "bottom"}
+
+\item{legend_text_size}{integer specifying size of legend text}
+
+\item{label_text_size}{integer specifying size of label text}
+
+\item{print_plot}{logical column indicating whether or not to save the plot to PDF}
+
+\item{plot_name}{name to save plot with}
+
+\item{path}{path to save plot to if not in current working directory}
 }
 \description{
 Create radar graph for LSG scores
