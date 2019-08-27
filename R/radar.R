@@ -68,7 +68,16 @@ radar_graph <- function(df,
                background.circle.transparency = 0.1,
                group.point.size = 3,
                legend.position = legend_position,
-               legend.text.size = legend_text_size)
+               legend.text.size = legend_text_size,
+               group.colours = c("#EE5859",
+                                 "#58585A",
+                                 "#D1D3D4",
+                                 "#D2CBB8",
+                                 "#A9C5A1",
+                                 "#FFF67A",
+                                 "#F69E61",
+                                 "#95A0A9",
+                                 "#56B3CD"))
 
   if (print_plot) {
     ggsave(paste0(plot_name, ".pdf"), p, path = path)
