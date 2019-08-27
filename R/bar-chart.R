@@ -82,6 +82,6 @@ severity_bar_chart <- function(df,
   }
 
   p <- p + coord_flip()
-  p
   ggsave(paste0(plot_name, ".pdf"), plot = p, path = path, height = length(unique(df[[group]])))
+  p
 }
