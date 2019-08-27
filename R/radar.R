@@ -4,7 +4,8 @@
 #' @param lsg character vector of all column names of LSG indices
 #' @param lsg_labels character vector of all labels for LSG indices
 #' @param group column name to group data by, e.g. population type
-#' @param group_labels character vector of labels for graph
+#' @param group_order character vector of how to order the graph, defaults to alphabetical ordering
+#' @param group_labels character vector of labels for graph, make sure they match the order for the data
 #' @param weighting_function weighting function used to weight MSNA dataset
 #' @param legend_position character specifying legend location, either "top", "left", "right", or "bottom"
 #' @param legend_text_size integer specifying size of legend text
@@ -13,7 +14,7 @@
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
 #'
-#' @importFrom dplyr filter transmute mutate mutate_at summarize_at rename bind_cols group_by
+#' @importFrom dplyr filter transmute mutate mutate_at summarize_at rename bind_cols group_by arrange
 #' @importFrom tibble add_column
 #' @importFrom purrr map_df
 #' @importFrom rlang !! sym
@@ -38,6 +39,7 @@ radar_graph <- function(df,
                                        "Protection",
                                        "WASH"),
                         group = NULL,
+                        group_order = NULL,
                         group_labels = NULL,
                         weighting_function = NULL,
                         legend_position = "right",
@@ -52,6 +54,12 @@ radar_graph <- function(df,
     data <- map_df(df[[2]], function(x) summarize_at(x, lsg, function(y) index_percent(x, as.character(substitute(y)), weighting_function)))
     data <- bind_cols(select(df, !! sym(group)), data) %>%
       rename(group = !! sym(group))
+
+    if (!is.null(group_order)) {
+      data <- arrange(data, match(group_order, group))
+    } else {
+      data <- arrange(data, group)
+    }
 
     if (!is.null(group_labels)) {
       data <- mutate(data, group = group_labels)
