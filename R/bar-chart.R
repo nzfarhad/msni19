@@ -20,7 +20,7 @@
 #' @importFrom ggplot2 ggplot aes theme_minimal labs scale_fill_manual scale_y_continuous scale_x_discrete ggsave coord_flip geom_bar geom_line theme scale_color_manual
 #'
 #' @export
-severity_chart <- function(df,
+index_chart <- function(df,
                            group = "group",
                            group_order = NULL,
                            group_labels = NULL,
