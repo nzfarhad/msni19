@@ -21,17 +21,17 @@
 #'
 #' @export
 index_chart <- function(df,
-                           group = "group",
-                           group_order = NULL,
-                           group_labels = NULL,
-                           index = "msni",
-                           index_max = 4,
-                           index_type = "msni",
-                           weighting_function = NULL,
-                           bar_graph = T,
-                           print_plot = F,
-                           plot_name = "severity_bar_chart",
-                           path = NULL) {
+                        group = "group",
+                        group_order = NULL,
+                        group_labels = NULL,
+                        index = "msni",
+                        index_max = 4,
+                        index_type = "msni",
+                        weighting_function = NULL,
+                        bar_graph = T,
+                        print_plot = F,
+                        plot_name = "severity_bar_chart",
+                        path = NULL) {
 
   df <- df %>%
     group_by(!!sym(group)) %>%
@@ -73,7 +73,6 @@ index_chart <- function(df,
   } else {
     data <- filter(data, score != "index_4_plus")
   }
-  print(data)
 
   if (bar_graph == T) {
     p <- ggplot(data = data, aes(x = !!sym(group), y = percent)) +
