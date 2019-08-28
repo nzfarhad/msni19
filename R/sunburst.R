@@ -48,7 +48,7 @@ sunburst <- function(df, cols, labels, parents, weighting_function = NULL, color
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
 #'
-#' @importFrom dplyr filter transmute mutate mutate_at
+#' @importFrom dplyr filter mutate mutate_at
 #' @importFrom rlang !! sym
 #' @importFrom plotly orca
 #'
@@ -72,7 +72,7 @@ sunburst_msni <- function(df,
                           path = NULL) {
 
   data <- df %>% filter(!!sym(msni) %in% msni_filter) %>%
-    transmute(msni = rep(1, nrow(.)),
+    mutate(msni = rep(1, nrow(.)),
               fsl_cause = ifelse(!!sym(fsl_lsg) %in% msni_filter, 1, 0),
            wash_cause = ifelse(!!sym(wash_lsg) %in% msni_filter, 1, 0),
            health_cause = ifelse(!!sym(health_lsg) %in% msni_filter, 1, 0),
