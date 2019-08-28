@@ -6,7 +6,7 @@
 \usage{
 severity_bar_chart(df, group = "group", group_order = NULL,
   group_labels = NULL, index = "msni", index_max = 4,
-  index_type = "msni", weights = NULL, print_plot = F,
+  index_type = "msni", weighting_function = NULL, print_plot = F,
   plot_name = "severity_bar_chart", path = NULL)
 }
 \arguments{
@@ -24,7 +24,7 @@ severity_bar_chart(df, group = "group", group_order = NULL,
 
 \item{index_type}{character vector specifying either "msni" or "lsg", to determine labels on scores}
 
-\item{weights}{column name for weights column in dataset}
+\item{weighting_function}{weighting function used to weight MSNA dataset}
 
 \item{print_plot}{Logical column indicating whether or not to save the plot to PDF}
 

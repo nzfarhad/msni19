@@ -8,9 +8,10 @@ sunburst_msni(df, msni = "msni", fsl_lsg = "fsl_lsg",
   health_lsg = "health_lsg", protection_lsg = "protection_lsg",
   shelter_lsg = "shelter_lsg", wash_lsg = "wash_lsg",
   capacity_gaps = "capacity_gaps", impact = "impact",
-  msni_filter = c(3, 4, 5), weights = NULL, fsl_wash_branch = F,
-  health_prot_shelt_branch = F, impact_branch = F, print_plot = F,
-  plot_name = "sunburst", path = NULL)
+  msni_filter = c(3, 4, 5), weighting_function = NULL,
+  fsl_wash_branch = F, health_prot_shelt_branch = F,
+  impact_branch = F, print_plot = F, plot_name = "sunburst",
+  path = NULL)
 }
 \arguments{
 \item{df}{MSNA data}
@@ -33,7 +34,7 @@ sunburst_msni(df, msni = "msni", fsl_lsg = "fsl_lsg",
 
 \item{msni_filter}{filter dataset for households with only specific MSNI scores}
 
-\item{weights}{column name for weights column in dataset}
+\item{weighting_function}{weighting function used to weight MSNA dataset}
 
 \item{fsl_wash_branch}{if TRUE, displays 3rd branch layer of FSL/WASH scores}
 

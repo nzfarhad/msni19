@@ -13,7 +13,7 @@
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
 #'
-#' @importFrom dplyr summarize_all mutate_all transmute select
+#' @importFrom dplyr summarize_all mutate_at transmute select
 #' @importFrom tidyr replace_na
 #' @importFrom rlang !! sym
 #' @importFrom eulerr euler
@@ -48,7 +48,7 @@ venn_msni <- function(df,
   }
 
   data <- data %>%
-    mutate_all(~ .x * weights) %>%
+    mutate_at(c("lsg_over_3", "cg_over_3", "lsg_cg_over_3"), ~ .x * weights) %>%
     select(-weights) %>%
     summarize_all(data, sum)
 

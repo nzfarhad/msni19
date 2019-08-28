@@ -7,8 +7,8 @@
 venn_msni(df, fsl_lsg = "fsl_lsg", health_lsg = "health_lsg",
   protection_lsg = NULL, shelter_lsg = "shelter_lsg",
   wash_lsg = "wash_lsg", education_lsg = "education_lsg",
-  capacity_gaps = "capacity_gaps", weights = NULL, print_plot = F,
-  plot_name = "venn", path = NULL)
+  capacity_gaps = "capacity_gaps", weighting_function = NULL,
+  print_plot = F, plot_name = "venn", path = NULL)
 }
 \arguments{
 \item{df}{MSNA data}
@@ -27,7 +27,7 @@ venn_msni(df, fsl_lsg = "fsl_lsg", health_lsg = "health_lsg",
 
 \item{capacity_gaps}{column name for capacity/coping index}
 
-\item{weights}{column name for weights column in dataset}
+\item{weighting_function}{function for weighting the data frame}
 
 \item{print_plot}{logical column indicating whether or not to save the plot to PDF}
 

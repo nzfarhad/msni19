@@ -4,7 +4,8 @@
 \alias{sunburst}
 \title{Creates sunburst from binary columns}
 \usage{
-sunburst(df, cols, labels, parents, weights = NULL, colors, na.rm = T)
+sunburst(df, cols, labels, parents, weighting_function = NULL, colors,
+  na.rm = T)
 }
 \arguments{
 \item{df}{data frame}
@@ -14,6 +15,8 @@ sunburst(df, cols, labels, parents, weights = NULL, colors, na.rm = T)
 \item{labels}{character vector of labels for each column name}
 
 \item{parents}{character vector of the parent column for each column. The top value should have blank value for parent, ""}
+
+\item{weighting_function}{weighting function used to weight MSNA dataset}
 
 \item{colors}{character vector of hex colors for branches, should ideally be a color specified for each 2nd level branch}
 
