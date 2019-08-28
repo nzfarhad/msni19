@@ -129,7 +129,7 @@ sunburst_msni <- function(df,
            cols = cols,
            labels = labels,
            parents = parents,
-           weights = weights,
+           weighting_function = weighting_function,
            colors = colors,
            na.rm = T)
 
