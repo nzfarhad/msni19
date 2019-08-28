@@ -13,7 +13,7 @@
 #' @importFrom dplyr mutate group_by summarize filter
 #' @importFrom stringr str_sub
 #' @importFrom rlang !! sym
-#' @importFrom ggplot2 ggplot geom_line theme_minimal theme scale_y_continuous scale_x_continuous scale_color_manual aes ggsave
+#' @importFrom ggplot2 ggplot geom_line theme_minimal theme scale_y_continuous scale_x_continuous scale_color_manual aes ggsave element_blank
 #' @importFrom tidyr gather
 #'
 #' @export
