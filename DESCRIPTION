@@ -23,7 +23,8 @@ Imports:
     forcats,
     tidyr,
     ggplot2,
-    stringr
+    stringr,
+    ggradar
 Suggests:
     testthat,
     knitr,

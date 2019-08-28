@@ -14,7 +14,7 @@
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
 #'
-#' @importFrom dplyr filter transmute mutate mutate_at summarize_at rename bind_cols group_by
+#' @importFrom dplyr filter transmute mutate mutate_at summarize_at rename bind_cols group_by arrange
 #' @importFrom tibble add_column
 #' @importFrom purrr map_df
 #' @importFrom rlang !! sym
@@ -56,7 +56,9 @@ radar_graph <- function(df,
       rename(group = !! sym(group))
 
     if (!is.null(group_order)) {
-      data <- mutate(data, group = factor(group, levels = group_order))
+      data <- arrange(data, match(group_order, group))
+    } else {
+      data <- arrange(data, group)
     }
 
     if (!is.null(group_labels)) {
