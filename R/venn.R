@@ -42,9 +42,9 @@ venn_msni <- function(df,
     select(lsg_over_3, cg_over_3, lsg_cg_over_3)
 
   if (is.null(weighting_function)) {
-    df$weights <- rep(1, nrow(df))
+    data$weights <- rep(1, nrow(df))
   } else {
-    df$weights <- weighting_function(df)
+    data$weights <- weighting_function(df)
   }
 
   data <- data %>%
