@@ -1,5 +1,4 @@
-
-#' Create stacked bar chart of severity scores for MSNI or other indices
+#' Create chart of severity scores for MSNI or other indices, either stacked bar or line
 #'
 #' @param df MSNA data
 #' @param group column name to group data by, e.g. population type
@@ -9,7 +8,8 @@
 #' @param index_max max value index can take, either 4 or 5
 #' @param index_type character vector specifying either "msni" or "lsg", to determine labels on scores
 #' @param weighting_function weighting function used to weight MSNA dataset
-#' @param print_plot Logical column indicating whether or not to save the plot to PDF
+#' @param bar_graph logical determining chart type, stacked bar if TRUE, line if FALSE
+#' @param print_plot logical column indicating whether or not to save the plot to PDF
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
 #'
@@ -17,10 +17,10 @@
 #' @importFrom rlang !! sym
 #' @importFrom forcats fct_rev
 #' @importFrom tidyr gather
-#' @importFrom ggplot2 ggplot aes theme_minimal labs scale_fill_manual scale_y_continuous scale_x_discrete ggsave coord_flip geom_bar
+#' @importFrom ggplot2 ggplot aes theme_minimal labs scale_fill_manual scale_y_continuous scale_x_discrete ggsave coord_flip geom_bar geom_line theme scale_color_manual
 #'
 #' @export
-severity_bar_chart <- function(df,
+severity_chart <- function(df,
                            group = "group",
                            group_order = NULL,
                            group_labels = NULL,
@@ -28,6 +28,7 @@ severity_bar_chart <- function(df,
                            index_max = 4,
                            index_type = "msni",
                            weighting_function = NULL,
+                           bar_graph = T,
                            print_plot = F,
                            plot_name = "severity_bar_chart",
                            path = NULL) {
@@ -72,20 +73,51 @@ severity_bar_chart <- function(df,
   } else {
     data <- filter(data, score != "index_4_plus")
   }
+  print(data)
 
-  p <- ggplot(data = data, aes(x = !!sym(group), y = percent)) +
-    geom_bar(aes(fill = forcats::fct_rev(score)), stat = "identity") +
-    theme_minimal() +
-    labs(fill = "", x = "", y = "") +
-    scale_fill_manual(values = index_fill,
-                      labels = index_labels) +
-    scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1))
+  if (bar_graph == T) {
+    p <- ggplot(data = data, aes(x = !!sym(group), y = percent)) +
+      geom_bar(aes(fill = forcats::fct_rev(score)), stat = "identity") +
+      labs(fill = "", x = "", y = "") + theme_minimal() +
+      scale_fill_manual(values = index_fill,
+                        labels = index_labels) +
+      scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1))
+    if (!is.null(group_labels)) {
+      p <- p + scale_x_discrete(labels = group_labels)
+    }
 
-  if (!is.null(group_labels)) {
-    p <- p + scale_x_discrete(labels = group_labels)
+    p <- p + coord_flip()
+  } else if (bar_graph == F) {
+    p <- ggplot(data = data, aes(x = score, y = percent, group = !!sym(group))) +
+      geom_line(aes(color = !!sym(group)), size = 1.3) +
+      theme_minimal() +
+      theme(legend.title = element_blank()) +
+      scale_y_continuous("", labels = function(x) scales::percent(x, accuracy = 1, scale = 1)) +
+      scale_x_discrete("", labels = rev(index_labels))
+
+    if (!is.null(group_labels)) {
+      p <- p + scale_color_manual(labels = group_labels,
+                                  values = c("#EE5859",
+                                             "#58585A",
+                                             "#D1D3D4",
+                                             "#D2CBB8",
+                                             "#A9C5A1",
+                                             "#FFF67A",
+                                             "#F69E61",
+                                             "#95A0A9",
+                                             "#56B3CD"))
+    } else {
+      p <- p + scale_color_manual(values = c("#EE5859",
+                                             "#58585A",
+                                             "#D1D3D4",
+                                             "#D2CBB8",
+                                             "#A9C5A1",
+                                             "#FFF67A",
+                                             "#F69E61",
+                                             "#95A0A9",
+                                             "#56B3CD"))
+    }
   }
-
-  p <- p + coord_flip()
 
   if (print_plot) {
     ggsave(paste0(plot_name, ".pdf"), plot = p, path = path, height = length(unique(df[[group]])))
@@ -93,3 +125,4 @@ severity_bar_chart <- function(df,
 
   p
 }
+

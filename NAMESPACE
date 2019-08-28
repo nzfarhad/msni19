@@ -3,7 +3,7 @@
 export("%>%")
 export(msni)
 export(radar_graph)
-export(severity_bar_chart)
+export(severity_chart)
 export(severity_lines)
 export(sunburst_msni)
 export(venn_msni)
