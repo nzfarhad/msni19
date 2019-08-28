@@ -109,7 +109,7 @@ severity_lines <- function(df,
   }
 
   if (print_plot) {
-    ggsave(paste0(plot_name, ".pdf"), plot = p, path = path)
+    ggsave(paste0(plot_name, ".pdf"), plot = p, path = path, height = 8, width = 6)
   }
 
   p
