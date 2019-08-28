@@ -64,6 +64,7 @@ radar_graph <- function(df,
     if (!is.null(group_labels)) {
       data <- mutate(data, group = group_labels)
     }
+    data <- mutate(data, group = factor(group, levels = group))
 
   } else {
     data <- summarize_at(df, lsg, function(x) index_percent(df, as.character(substitute(x)), weighting_function)) %>%

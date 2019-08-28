@@ -31,4 +31,5 @@ Suggests:
     rmarkdown,
     processx
 VignetteBuilder: knitr
-Remotes: ricardo-bion/ggradar
+Remotes: 
+    caldwellst/ggradar
