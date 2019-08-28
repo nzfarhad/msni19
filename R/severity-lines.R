@@ -13,7 +13,7 @@
 #' @importFrom dplyr mutate group_by summarize filter
 #' @importFrom stringr str_sub
 #' @importFrom rlang !! sym
-#' @importFrom ggplot2 ggplot geom_line theme_minimal theme scale_y_continuous scale_x_continuous scale_color_manual aes ggsave element_blank
+#' @importFrom ggplot2 ggplot geom_line theme_minimal theme scale_y_continuous scale_x_continuous scale_color_manual aes ggsave element_blank scale_color_discrete
 #' @importFrom tidyr gather
 #'
 #' @export
@@ -66,7 +66,7 @@ severity_lines <- function(df,
       theme(legend.title = element_blank())
 
     if (!is.null(group_labels)) {
-      p <- p + theme(legend.text = group_labels)
+      p <- p + scale_color_discrete(labels = group_labels)
     }
     p <- p + scale_y_continuous("", labels = function(x) scales::percent(x, accuracy = 1)) +
       scale_x_continuous("# of sectors", labels = data$severity, breaks = data$severity) +
