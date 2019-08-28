@@ -50,7 +50,7 @@ venn_msni <- function(df,
   data <- data %>%
     mutate_at(c("lsg_over_3", "cg_over_3", "lsg_cg_over_3"), ~ .x * weights) %>%
     select(-weights) %>%
-    summarize_all(data, sum)
+    summarize_all(sum)
 
   data <- as.numeric(unlist(data))
   fit <- euler(c("A" = data[1], "B" = data[2], "A&B" = data[3]))
