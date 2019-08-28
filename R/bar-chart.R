@@ -47,7 +47,6 @@ severity_bar_chart <- function(df,
                            index_3 = 100 * sum((!!sym(index) == 3) * weights) / sum(weights),
                            index_4 = 100 * sum((!!sym(index) == 4) * weights) / sum(weights),
                            index_4_plus = sum((!!sym(index) > 4) * weights) / sum(weights)) %>%
-    select(-weights) %>%
     gather("score", "percent", -!!sym(group))
 
   if (!is.null(group_order)) {
