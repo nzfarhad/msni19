@@ -8,7 +8,7 @@
 #' @param wash_lsg column name for wash index
 #' @param education_lsg column name for education index
 #' @param capacity_gaps column name for capacity/coping index
-#' @param weights column name for weights column in dataset
+#' @param weighting_function function for weighting the data frame
 #' @param print_plot logical column indicating whether or not to save the plot to PDF
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
@@ -27,7 +27,7 @@ venn_msni <- function(df,
                       wash_lsg = "wash_lsg",
                       education_lsg = "education_lsg",
                       capacity_gaps = "capacity_gaps",
-                      weights = NULL,
+                      weighting_function = NULL,
                       print_plot = F,
                       plot_name = "venn",
                       path = NULL) {
@@ -41,12 +41,17 @@ venn_msni <- function(df,
               cg_over_3 = cg_over_3 - lsg_cg_over_3) %>%
     select(lsg_over_3, cg_over_3, lsg_cg_over_3)
 
-  if (!is.null(weights)) {
-    data <- data %>%
-      mutate_all(~ .x * !!sym(weights))
+  if (is.null(weighting_function)) {
+    df$weights <- rep(1, nrow(df))
+  } else {
+    df$weights <- weighting_function(df)
   }
 
-  data <- summarize_all(data, sum)
+  data <- data %>%
+    mutate_all(~ .x * weights) %>%
+    select(-weights) %>%
+    summarize_all(data, sum)
+
   data <- as.numeric(unlist(data))
   fit <- euler(c("A" = data[1], "B" = data[2], "A&B" = data[3]))
   if (print_plot) {

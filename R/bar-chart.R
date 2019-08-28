@@ -8,7 +8,7 @@
 #' @param index column name for scoring index to graph with
 #' @param index_max max value index can take, either 4 or 5
 #' @param index_type character vector specifying either "msni" or "lsg", to determine labels on scores
-#' @param weights column name for weights column in dataset
+#' @param weighting_function weighting function used to weight MSNA dataset
 #' @param print_plot Logical column indicating whether or not to save the plot to PDF
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
@@ -27,24 +27,27 @@ severity_bar_chart <- function(df,
                            index = "msni",
                            index_max = 4,
                            index_type = "msni",
-                           weights = NULL,
+                           weighting_function = NULL,
                            print_plot = F,
                            plot_name = "severity_bar_chart",
                            path = NULL) {
-  if (is.null(weights)) {
+
+  df <- df %>%
+    group_by(!!sym(group)) %>%
+    filter(!is.na(!!sym(index)))
+
+  if (is.null(weighting_function)) {
     df$weights <- rep(1, nrow(df))
   } else {
-    df$weights <- df[[weights]]
+    df$weights <- weighting_function(df)
   }
 
-  data <- df %>%
-    group_by(!!sym(group)) %>%
-    filter(!is.na(!!sym(index))) %>%
-    summarize(index_1 = 100 * sum((!!sym(index) == 1) * weights) / sum(weights),
-              index_2 = 100 * sum((!!sym(index) == 2) * weights) / sum(weights),
-              index_3 = 100 * sum((!!sym(index) == 3) * weights) / sum(weights),
-              index_4 = 100 * sum((!!sym(index) == 4) * weights) / sum(weights),
-              index_4_plus = sum((!!sym(index) > 4) * weights) / sum(weights)) %>%
+  data <- df %>% summarize(index_1 = 100 * sum((!!sym(index) == 1) * weights) / sum(weights),
+                           index_2 = 100 * sum((!!sym(index) == 2) * weights) / sum(weights),
+                           index_3 = 100 * sum((!!sym(index) == 3) * weights) / sum(weights),
+                           index_4 = 100 * sum((!!sym(index) == 4) * weights) / sum(weights),
+                           index_4_plus = sum((!!sym(index) > 4) * weights) / sum(weights)) %>%
+    select(-weights) %>%
     gather("score", "percent", -!!sym(group))
 
   if (!is.null(group_order)) {

@@ -7,16 +7,19 @@
 #' @param cols character vector of binary columns to calculate groups from
 #' @param labels character vector of labels for each column name
 #' @param parents character vector of the parent column for each column. The top value should have blank value for parent, ""
+#' @param weighting_function weighting function used to weight MSNA dataset
 #' @param colors character vector of hex colors for branches, should ideally be a color specified for each 2nd level branch
 #' @param na.rm if TRUE, ignore NAs in summation of binary columns
 #'
 #' @return plot_ly plot object
-sunburst <- function(df, cols, labels, parents, weights = NULL, colors, na.rm = T) {
-  if (is.null(weights)) {
-    data <- summarize_at(df, cols, ~ (sum(.x, na.rm = na.rm)))
+sunburst <- function(df, cols, labels, parents, weighting_function = NULL, colors, na.rm = T) {
+  if (is.null(weighting_function)) {
+    df$weights <- rep(1, nrow(df))
   } else {
-    data <- summarize_at(df, cols, ~ sum(.x * !!sym(weights), na.rm = na.rm))
+    df$weights <- weighting_function(df)
   }
+
+  data <- summarize_at(df, cols, ~ sum(.x * weights, na.rm = na.rm))
   data <- as.numeric(unlist(data, use.names = F))
   center <- which(parents == "")
   percents <- round(100 * (data / data[center]), digits = 0)
@@ -37,7 +40,7 @@ sunburst <- function(df, cols, labels, parents, weights = NULL, colors, na.rm = 
 #' @param capacity_gaps column name for capacity/coping index
 #' @param impact column name for impact index
 #' @param msni_filter filter dataset for households with only specific MSNI scores
-#' @param weights column name for weights column in dataset
+#' @param weighting_function weighting function used to weight MSNA dataset
 #' @param fsl_wash_branch if TRUE, displays 3rd branch layer of FSL/WASH scores
 #' @param health_prot_shelter_branch if TRUE, displays 3rd branch layer for H/P/S scores
 #' @param impact_branch if TRUE, displays 3rd layer of impact branch
@@ -60,7 +63,7 @@ sunburst_msni <- function(df,
                           capacity_gaps = "capacity_gaps",
                           impact = "impact",
                           msni_filter = c(3, 4, 5),
-                          weights = NULL,
+                          weighting_function = NULL,
                           fsl_wash_branch = F,
                           health_prot_shelt_branch = F,
                           impact_branch = F,
