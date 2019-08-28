@@ -13,7 +13,7 @@
 #' @importFrom dplyr mutate group_by summarize filter
 #' @importFrom stringr str_sub
 #' @importFrom rlang !! sym
-#' @importFrom ggplot2 ggplot geom_line theme_minimal theme scale_y_continuous scale_x_continuous scale_color_manual aes ggsave element_blank scale_color_discrete
+#' @importFrom ggplot2 ggplot geom_line theme_minimal theme scale_y_continuous scale_x_continuous scale_color_manual aes ggsave element_blank
 #' @importFrom tidyr gather
 #'
 #' @export
@@ -63,22 +63,33 @@ severity_lines <- function(df,
     p <- ggplot(data, aes(x = severity, y = percent, group = !!sym(group))) +
       geom_line(aes(color = !!sym(group)), size = 1.3) +
       theme_minimal() +
-      theme(legend.title = element_blank())
+      theme(legend.title = element_blank()) +
+      scale_y_continuous("", labels = function(x) scales::percent(x, accuracy = 1)) +
+      scale_x_continuous("# of sectors", labels = data$severity, breaks = data$severity)
 
     if (!is.null(group_labels)) {
-      p <- p + scale_color_discrete(labels = group_labels)
+      p <- p + scale_color_manual(labels = group_labels,
+                                    values = c("#EE5859",
+                                               "#58585A",
+                                               "#D1D3D4",
+                                               "#D2CBB8",
+                                               "#A9C5A1",
+                                               "#FFF67A",
+                                               "#F69E61",
+                                               "#95A0A9",
+                                               "#56B3CD"))
+    } else {
+      p <- p + scale_color_manual(values = c("#EE5859",
+                                            "#58585A",
+                                            "#D1D3D4",
+                                            "#D2CBB8",
+                                            "#A9C5A1",
+                                            "#FFF67A",
+                                            "#F69E61",
+                                            "#95A0A9",
+                                            "#56B3CD"))
     }
-    p <- p + scale_y_continuous("", labels = function(x) scales::percent(x, accuracy = 1)) +
-      scale_x_continuous("# of sectors", labels = data$severity, breaks = data$severity) +
-      scale_color_manual(values = c("#EE5859",
-                                    "#58585A",
-                                    "#D1D3D4",
-                                    "#D2CBB8",
-                                    "#A9C5A1",
-                                    "#FFF67A",
-                                    "#F69E61",
-                                    "#95A0A9",
-                                    "#56B3CD"))
+
   } else {
     p <- ggplot(data, aes(x = severity, y = percent)) +
       geom_line(size = 1.3) +
