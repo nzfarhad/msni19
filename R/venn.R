@@ -1,12 +1,7 @@
 #' Create venn diagram of living standards gaps >= 3 and capacity gaps >= 3
 #'
 #' @param df MSNA data
-#' @param fsl_lsg column name for FSL index
-#' @param health_lsg column name for health index
-#' @param protection_lsg column name for protection index
-#' @param shelter_lsg column name for shelter index
-#' @param wash_lsg column name for wash index
-#' @param education_lsg column name for education index
+#' @param lsg character vector of all column names of LSG indices
 #' @param capacity_gaps column name for capacity/coping index
 #' @param weighting_function function for weighting the data frame
 #' @param print_plot logical column indicating whether or not to save the plot to PDF
@@ -20,21 +15,20 @@
 #'
 #' @export
 venn_msni <- function(df,
-                      fsl_lsg = "fsl_lsg",
-                      health_lsg = "health_lsg",
-                      protection_lsg = NULL,
-                      shelter_lsg = "shelter_lsg",
-                      wash_lsg = "wash_lsg",
-                      education_lsg = "education_lsg",
+                      lsg = c("education_lsg",
+                              "shelter_lsg",
+                              "fsl_lsg",
+                              "health_lsg",
+                              "nutrition_lsg",
+                              "protection_lsg",
+                              "wash_lsg"),
                       capacity_gaps = "capacity_gaps",
                       weighting_function = NULL,
                       print_plot = F,
                       plot_name = "venn",
                       path = NULL) {
-
-  lsg_cols <- c(fsl_lsg, health_lsg, protection_lsg, shelter_lsg, wash_lsg, education_lsg)
   data <- df %>%
-    transmute(lsg_over_3 = pmin(1, rowSums(select(., lsg_cols) >= 3, na.rm = T)),
+    transmute(lsg_over_3 = pmin(1, rowSums(select(., lsg) >= 3, na.rm = T)),
               cg_over_3 = replace_na(as.numeric(!!sym(capacity_gaps) >= 3), 0),
               lsg_cg_over_3 = as.numeric(lsg_over_3 + cg_over_3 > 1),
               lsg_over_3 = lsg_over_3 - lsg_cg_over_3,
