@@ -4,26 +4,15 @@
 \alias{venn_msni}
 \title{Create venn diagram of living standards gaps >= 3 and capacity gaps >= 3}
 \usage{
-venn_msni(df, fsl_lsg = "fsl_lsg", health_lsg = "health_lsg",
-  protection_lsg = NULL, shelter_lsg = "shelter_lsg",
-  wash_lsg = "wash_lsg", education_lsg = "education_lsg",
+venn_msni(df, lsg = c("education_lsg", "shelter_lsg", "fsl_lsg",
+  "health_lsg", "nutrition_lsg", "protection_lsg", "wash_lsg"),
   capacity_gaps = "capacity_gaps", weighting_function = NULL,
   print_plot = F, plot_name = "venn", path = NULL)
 }
 \arguments{
 \item{df}{MSNA data}
 
-\item{fsl_lsg}{column name for FSL index}
-
-\item{health_lsg}{column name for health index}
-
-\item{protection_lsg}{column name for protection index}
-
-\item{shelter_lsg}{column name for shelter index}
-
-\item{wash_lsg}{column name for wash index}
-
-\item{education_lsg}{column name for education index}
+\item{lsg}{character vector of all column names of LSG indices}
 
 \item{capacity_gaps}{column name for capacity/coping index}
 

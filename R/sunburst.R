@@ -1,7 +1,7 @@
 #' Creates sunburst from binary columns
 #'
 #' @importFrom plotly plot_ly layout
-#' @importFrom dplyr summarize_at
+#' @importFrom dplyr summarize_at mutate_all
 #'
 #' @param df data frame
 #' @param cols character vector of binary columns to calculate groups from
@@ -20,9 +20,30 @@ sunburst <- function(df, cols, labels, parents, weighting_function = NULL, color
   }
 
   data <- summarize_at(df, cols, ~ sum(.x * weights, na.rm = na.rm))
-  data <- as.numeric(unlist(data, use.names = F))
+
+  # Extracting exact percents from the data
+  data_vector <- as.numeric(unlist(data, use.names = F))
   center <- which(parents == "")
-  percents <- round(100 * (data / data[center]), digits = 0)
+  percents <- round(100 * (data_vector / data_vector[center]), digits = 0)
+
+  # Getting integers from the data that sum up to parents integer perfectly, otherwise plotly silently fails
+  data <- mutate_all(data, round, 0) %>% unlist
+
+  for (i in names(data)) {
+    if (i %in% parents) {
+      child_sum <- sum(data[parents %in% i])
+      if (child_sum != data[i]) {
+        change <- data[i] - child_sum
+        if(abs(change) > 2) {
+          abort("child and parent data not aligning")
+        } else {
+          which_max <- names(which.max(data[parents %in% i]))
+          data[which_max] <- data[which_max] + change
+        }
+      }
+    }
+  }
+
   labels[-center] <- paste0(labels[-center], "<br>", percents[-center], "%")
   plot_ly(ids = cols, parents = parents, values = data, labels = labels, type = "sunburst", branchvalues = "total") %>%
     layout(colorway = colors)
