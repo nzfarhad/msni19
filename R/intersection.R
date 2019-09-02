@@ -50,7 +50,7 @@ index_intersections <- function(df,
     if (!is.null(path)) {
       plot_name <- paste(path, plot_name, sep = "/")
     }
-    pdf(paste0(plot_name, ".pdf"), onefile = F)
+    pdf(paste0(plot_name, ".pdf"), width = 4, height = 4, onefile = F)
     p <- plot_set_percentages(df,
                               lsg,
                               weighting_function = weighting_function,
