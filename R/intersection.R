@@ -13,6 +13,8 @@
 #'
 #' @importFrom Setviz plot_set_percentages
 #' @importFrom dplyr mutate_at
+#'
+#' @export
 index_intersections <- function(df,
                                 lsg = c("education_lsg",
                                 "shelter_lsg",
@@ -48,7 +50,7 @@ index_intersections <- function(df,
     dev.off()
     p
   } else {
-    plot_set_percentages(df, lsg, weight_function = weighting_function, nintersects = nintersects,
+    plot_set_percentages(df, lsg, weighting_function = weighting_function, nintersects = nintersects,
                          exclude_unique = exclude_unique, label = lsg_labels)
   }
 }
