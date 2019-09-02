@@ -54,7 +54,6 @@ index_intersections <- function(df,
                               weighting_function = weighting_function,
                               nintersects = nintersects,
                               exclude_unique = exclude_unique,
-                              nset = length(lsg),
                               label = y_label)
     print(p)
     dev.off()

@@ -6,8 +6,8 @@
 \usage{
 index_intersections(df, lsg = c("education_lsg", "shelter_lsg",
   "fsl_lsg", "health_lsg", "nutrition_lsg", "protection_lsg", "wash_lsg"),
-  lsg_labels = c("Education", "Shelter", "Food Security", "Health",
-  "Nutrition", "Protection", "WASH"),
+  lsg_labels = c("Education", "Shelter", "Food", "Health", "Nutrition",
+  "Protection", "WASH"),
   y_label = "\% in need per combination of sectors",
   index_filter = c(3, 4, 5), weighting_function = NULL,
   nintersects = 12, exclude_unique = T, print_plot = F,
