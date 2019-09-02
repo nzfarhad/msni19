@@ -41,7 +41,7 @@ index_intersections <- function(df,
 
   df <- mutate_at(df, lsg, ~ .x %in% index_filter)
   if (!is.null(lsg_labels) & !is.na(lsg_labels)) {
-    df <- rename_at(df, lsg, lsg_labels)
+    df <- rename_at(df, lsg, ~ lsg_labels)
     lsg <- lsg_labels
   }
   if (print_plot) {
