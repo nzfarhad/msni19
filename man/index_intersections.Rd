@@ -6,12 +6,12 @@
 \usage{
 index_intersections(df, lsg = c("education_lsg", "shelter_lsg",
   "fsl_lsg", "health_lsg", "nutrition_lsg", "protection_lsg", "wash_lsg"),
-  lsg_labels = c("Education in\\nEmergency",
-  "Emergency Shelter\\nand NFI", "Food Security and\\nAgriculture",
-  "Health", "Nutrition", "Protection", "WASH"), index_filter = c(3, 4,
-  5), weighting_function = NULL, nintersects = 12,
-  exclude_unique = T, print_plot = F, plot_name = "intersection",
-  path = NULL)
+  lsg_labels = c("Education", "Shelter", "Food Security", "Health",
+  "Nutrition", "Protection", "WASH"),
+  y_label = "\% in need per combination of sectors",
+  index_filter = c(3, 4, 5), weighting_function = NULL,
+  nintersects = 12, exclude_unique = T, print_plot = F,
+  plot_name = "intersection", path = NULL)
 }
 \arguments{
 \item{df}{data frame}

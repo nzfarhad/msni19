@@ -23,13 +23,14 @@ index_intersections <- function(df,
                                 "nutrition_lsg",
                                 "protection_lsg",
                                 "wash_lsg"),
-                                lsg_labels = c("Education in\nEmergency",
-                                               "Emergency Shelter\nand NFI",
-                                               "Food Security and\nAgriculture",
+                                lsg_labels = c("Education",
+                                               "Shelter",
+                                               "Food Security",
                                                "Health",
                                                "Nutrition",
                                                "Protection",
                                                "WASH"),
+                                y_label = "% in need per combination of sectors",
                                 index_filter = c(3,4,5),
                                 weighting_function = NULL,
                                 nintersects = 12,
@@ -39,6 +40,10 @@ index_intersections <- function(df,
                                 path = NULL) {
 
   df <- mutate_at(df, lsg, ~ .x %in% index_filter)
+  if (!is.null(lsg_labels) & !is.na(lsg_labels)) {
+    df <- rename_at(df, lsg, lsg_labels)
+    lsg <- lsg_labels
+  }
   if (print_plot) {
     if (!is.null(path)) {
       plot_name <- paste(path, plot_name, sep = "/")
