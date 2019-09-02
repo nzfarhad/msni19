@@ -25,7 +25,7 @@ index_intersections <- function(df,
                                 "wash_lsg"),
                                 lsg_labels = c("Education",
                                                "Shelter",
-                                               "Food Security",
+                                               "Food",
                                                "Health",
                                                "Nutrition",
                                                "Protection",
@@ -49,13 +49,23 @@ index_intersections <- function(df,
       plot_name <- paste(path, plot_name, sep = "/")
     }
     pdf(paste0(plot_name, ".pdf"))
-    p <- plot_set_percentages(df, lsg, weight_function = weighting_function, nintersects = nintersects,
-                              exclude_unique = exclude_unique, label = lsg_labels)
+    p <- plot_set_percentages(df,
+                              lsg,
+                              weight_function = weighting_function,
+                              nintersects = nintersects,
+                              exclude_unique = exclude_unique,
+                              nsets = length(lsg),
+                              label = y_label)
     print(p)
     dev.off()
     p
   } else {
-    plot_set_percentages(df, lsg, weighting_function = weighting_function, nintersects = nintersects,
-                         exclude_unique = exclude_unique, label = lsg_labels)
+    plot_set_percentages(df,
+                         lsg,
+                         weight_function = weighting_function,
+                         nintersects = nintersects,
+                         exclude_unique = exclude_unique,
+                         nsets = length(lsg),
+                         label = y_label)
   }
 }
