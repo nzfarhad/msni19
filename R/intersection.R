@@ -12,7 +12,7 @@
 #' @param path path to save plot to if not in current working directory
 #'
 #' @importFrom Setviz plot_set_percentages
-#' @importFrom dplyr mutate_at
+#' @importFrom dplyr mutate_at rename_at
 #'
 #' @export
 index_intersections <- function(df,
