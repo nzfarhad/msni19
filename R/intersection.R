@@ -40,10 +40,12 @@ index_intersections <- function(df,
                                 path = NULL) {
 
   df <- mutate_at(df, lsg, ~ .x %in% index_filter)
-  if (suppressWarnings(!is.null(lsg_labels) & !is.na(lsg_labels))) {
-    df <- rename_at(df, lsg, ~ lsg_labels)
-    lsg <- lsg_labels
-  }
+  suppressWarnings(
+    if (!is.null(lsg_labels) & !is.na(lsg_labels)) {
+      df <- rename_at(df, lsg, ~ lsg_labels)
+      lsg <- lsg_labels
+    }
+  )
   if (print_plot) {
     if (!is.null(path)) {
       plot_name <- paste(path, plot_name, sep = "/")
