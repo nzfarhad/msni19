@@ -24,7 +24,8 @@ Imports:
     tidyr,
     ggplot2,
     stringr,
-    ggradar
+    ggradar,
+    Setviz
 Suggests:
     testthat,
     knitr,
@@ -33,3 +34,4 @@ Suggests:
 VignetteBuilder: knitr
 Remotes: 
     caldwellst/ggradar
+    caldwellst/Setviz
