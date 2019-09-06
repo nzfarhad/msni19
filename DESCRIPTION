@@ -33,5 +33,5 @@ Suggests:
     processx
 VignetteBuilder: knitr
 Remotes: 
-    caldwellst/ggradar,
+    ricardo-bion/ggradar,
     caldwellst/Setviz
