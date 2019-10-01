@@ -13,7 +13,7 @@
 #' @param print_plot logical column indicating whether or not to save the plot to PDF
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
-#' @param index_threshold index threshold to graph
+#' @param index_threshold sectoral index threshold to graph percentage greater than (default=3)
 #'
 #' @importFrom dplyr filter transmute mutate mutate_at summarize_at rename bind_cols group_by arrange
 #' @importFrom tibble add_column
