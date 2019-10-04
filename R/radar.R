@@ -50,7 +50,7 @@ radar_graph <- function(df,
                         path = NULL) {
 
   if (!is.null(group)) {
-    df <- group_by(df, !! sym(group)) %>% nest()
+    df <- group_by(df, !! sym(group)) %>% nest() %>% ungroup()
     data <- map_df(df[[2]], function(x) summarize_at(x, lsg, function(y) index_percent(x, as.character(substitute(y)), weighting_function)))
     data <- bind_cols(select(df, !! sym(group)), data) %>%
       rename(group = !! sym(group))
