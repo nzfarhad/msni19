@@ -13,6 +13,7 @@
 #' @param print_plot logical column indicating whether or not to save the plot to PDF
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
+#' @param index_threshold sectoral index threshold to graph percentage greater than (default=3)
 #'
 #' @importFrom dplyr filter transmute mutate mutate_at summarize_at rename bind_cols group_by arrange
 #' @importFrom tibble add_column
@@ -47,11 +48,12 @@ radar_graph <- function(df,
                         label_text_size = 4,
                         print_plot = F,
                         plot_name = "radar_graph",
-                        path = NULL) {
+                        path = NULL,
+                        index_threshold=3) {
 
   if (!is.null(group)) {
     df <- group_by(df, !! sym(group)) %>% nest()
-    data <- map_df(df[[2]], function(x) summarize_at(x, lsg, function(y) index_percent(x, as.character(substitute(y)), weighting_function)))
+    data <- map_df(df[[2]], function(x) summarize_at(x, lsg, function(y) index_percent(x, as.character(substitute(y)), weighting_function,index_threshold)))
     data <- bind_cols(select(df, !! sym(group)), data) %>%
       rename(group = !! sym(group))
 
@@ -100,7 +102,7 @@ radar_graph <- function(df,
 #' @importFrom rlang !! sym
 #'
 #' @noRd
-index_percent <- function(df, index, weighting_function) {
+index_percent <- function(df, index, weighting_function,index_threshold) {
   df <- filter(df, !is.na(!! sym(index)))
   if (!is.null(weighting_function)) {
     df$weights <- weighting_function(df)
@@ -108,6 +110,6 @@ index_percent <- function(df, index, weighting_function) {
     df$weights <- rep(1, nrow(df))
   }
 
-  df <- summarize(df, !! sym(index) := sum((!! sym(index) >= 3) * weights) / sum(weights))
+  df <- summarize(df, !! sym(index) := sum((!! sym(index) >= index_threshold) * weights) / sum(weights))
   pull(df, !! sym(index))
 }
