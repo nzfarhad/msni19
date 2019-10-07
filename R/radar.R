@@ -49,11 +49,11 @@ radar_graph <- function(df,
                         print_plot = F,
                         plot_name = "radar_graph",
                         path = NULL,
-                        index_threshold=3) {
+                        index_threshold = 3) {
 
   if (!is.null(group)) {
     df <- group_by(df, !! sym(group)) %>% nest()
-    data <- map_df(df[[2]], function(x) summarize_at(x, lsg, function(y) index_percent(x, as.character(substitute(y)), weighting_function,index_threshold)))
+    data <- map_df(df[[2]], function(x) summarize_at(x, lsg, function(y) index_percent(x, as.character(substitute(y)), weighting_function, index_threshold)))
     data <- bind_cols(select(df, !! sym(group)), data) %>%
       rename(group = !! sym(group))
 
