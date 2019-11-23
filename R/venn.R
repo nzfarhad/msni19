@@ -47,10 +47,10 @@ venn_msni <- function(df,
     summarize_all(sum)
 
   data <- as.numeric(unlist(data))
-  print(paste0(
-    "LSG over 3 is ", data[1], "%\n",
-    "CG over 3 is ", data[2], "%\n",
-    "Overlap is ", data[3], "%\n"
+  cat(paste0(
+    "LSG over 3 is ", round(data[1]/sum(data)), "%\n",
+    "CG over 3 is ", round(data[2]/sum(data)), "%\n",
+    "Overlap is ", round(data[3]/sum(data)), "%\n"
   ))
   fit <- euler(c("A" = data[1], "B" = data[2], "A&B" = data[3]))
   if (print_plot) {
