@@ -12,6 +12,7 @@
 #' @param print_plot logical column indicating whether or not to save the plot to PDF
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
+#' @param language value of "en" or "fr" to indicate if the text on the graph is in English or French
 #'
 #' @importFrom dplyr filter group_by summarize mutate n
 #' @importFrom rlang !! sym
@@ -31,7 +32,8 @@ index_chart <- function(df,
                         bar_graph = T,
                         print_plot = F,
                         plot_name = "severity_bar_chart",
-                        path = NULL) {
+                        path = NULL,
+                        language = "en") {
 
   df <- df %>%
     group_by(!!sym(group)) %>%
@@ -55,21 +57,29 @@ index_chart <- function(df,
   }
 
   index_fill <- c("#F7ACAC", "#FACDCD", "#A7A9AC", "#58585A")
-  if (index_type == "msni") {
-    index_labels <- c("Extreme (4)", "Severe (3)", "Stress (2)", "Minimal (1)")
-  } else {
+  if (language == "en") {
     index_labels <- c("Extreme", "Severe", "Stress", "Minimal")
+  } else if (language == "fr") {
+    index_labels <- c("Extrême", "Sévère", "Stress", "Minimale")
   }
-
-
+  if (index_type == "msni") {
+    index_labels <- paste(index_labels, c("(4)", "(3)", "(2)", "(1)"))
+  }
   if (index_max == 5) {
     index_fill <- c("#EE5A59", index_fill)
     if (index_type == "msni") {
-      index_labels <- c("Extreme+ (4+)", index_labels)
+      if (language == "en") {
+        index_labels <- c("Extreme+ (4+)", index_labels)
+      } else if (language == "fr") {
+        index_labels <- c("Extrême+ (4+)", index_labels)
+      }
     } else {
-      index_labels <- c("Catastrophic", index_labels)
+      if (language == "en") {
+        index_labels <- c("Catastrophic", index_labels)
+      } else if (language == "fr") {
+        index_labels <- c("Catastrophique", index_labels)
+      }
     }
-
   } else {
     data <- filter(data, score != "index_4_plus")
   }

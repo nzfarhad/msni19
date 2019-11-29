@@ -68,6 +68,7 @@ sunburst <- function(df, cols, labels, parents, weighting_function = NULL, color
 #' @param print_plot logical column indicating whether or not to save the plot to PDF
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
+#' @param language value of "en" or "fr" to indicate if the text on the graph is in English or French
 #'
 #' @importFrom dplyr filter mutate mutate_at
 #' @importFrom rlang !! sym
@@ -90,7 +91,9 @@ sunburst_msni <- function(df,
                           impact_branch = F,
                           print_plot = F,
                           plot_name = "sunburst",
-                          path = NULL) {
+                          path = NULL,
+                          language = "en") {
+  language <- match.arg(language, c("en", "fr"))
 
   data <- df %>% filter(!!sym(msni) %in% msni_filter) %>%
     mutate(msni = rep(1, nrow(.)),
@@ -124,25 +127,45 @@ sunburst_msni <- function(df,
               ~ ifelse(fsl_wash_total + capacity_total + health_prot_shelter_total >= 1, 0, .x))
 
   cols <- c("msni", "fsl_wash_total", "capacity_total", "health_prot_shelter_total", "impact_total")
-  labels <- c("", "FSL / WASH", "Capacity gaps", "H / P / S", "Impact")
+  if (language == "en") {
+    labels <- c("", "FSL / WASH", "Capacity gaps", "H / P / S", "Impact")
+  } else if (language == "fr") {
+    labels <- c("", "SecAl / EHA", "Déficits de capacité", "S / P / A", "Impact")
+  }
+
   parents <- c("", "msni", "msni", "msni", "msni")
   colors <- c("#EE5859", "#D2CBB8", "#D1D3D4", "#585859")
 
   if (fsl_wash_branch) {
     cols <- c(cols, "fsl_cause", "wash_cause", "fsl_wash_cause")
-    labels <- c(labels, "FSL", "WASH", "FSL & WASH")
+    if (language == "en") {
+      labels <- c(labels, "FSL", "WASH", "FSL & WASH")
+    } else if (language == "fr") {
+      labels <- c(labels, "SecAl", "EHA", "SecAl & EHA")
+    }
+
     parents <- c(parents, rep("fsl_wash_total", 3))
   }
 
   if (health_prot_shelt_branch) {
     cols <- c(cols, "health_shelter_cause", "prot_shelter_cause", "health_prot_cause", "health_prot_shelter_cause")
-    labels <- c(labels, "H + S", "P + S", "H + P", "H + P + S")
+    if (language == "en") {
+      labels <- c(labels, "H + S", "P + S", "H + P", "H + P + S")
+    } else if (language == "fr") {
+      labels <- c(labels, "S + A", "P + A", "S + P", "S + P + A")
+    }
+
     parents <- c(parents, rep("health_prot_shelter_total", 4))
   }
 
   if (impact_branch) {
     cols <- c(cols, "impact_health_cause", "impact_prot_cause", "impact_shelter_cause")
-    labels <- c(labels, "I + H", "I + P", "I + S")
+    if (language == "en") {
+      labels <- c(labels, "I + H", "I + P", "I + S")
+    } else if (language == "fr") {
+      labels <- c(labels, "I + S", "I + P", "I + A")
+    }
+
     parents <- c(parents, rep("impact_total", 3))
   }
 

@@ -9,6 +9,7 @@
 #' @param print_plot logical column indicating whether or not to save the plot to PDF
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
+#' @param language value of "en" or "fr" to indicate if the text on the graph is in English or French
 #'
 #' @importFrom dplyr mutate group_by summarize filter
 #' @importFrom stringr str_sub
@@ -31,12 +32,20 @@ severity_lines <- function(df,
                            weighting_function = NULL,
                            print_plot = F,
                            plot_name = "severity_lines",
-                           path = NULL) {
+                           path = NULL,
+                           language = "en") {
 
   if (is.null(weighting_function)) {
     df$weights <- rep(1, nrow(df))
   } else {
     df$weights <- weighting_function(df)
+  }
+
+  language <- match.arg(language, c("en", "fr"))
+  if (language == "en") {
+    x_axis_labs <- "# of sectors"
+  } else if (language == "fr") {
+    x_axis_labs <- "# de secteurs"
   }
 
   data <- df %>%
@@ -65,7 +74,7 @@ severity_lines <- function(df,
       theme_minimal() +
       theme(legend.title = element_blank()) +
       scale_y_continuous("", labels = function(x) scales::percent(x, accuracy = 1)) +
-      scale_x_continuous("# of sectors", labels = data$severity, breaks = data$severity)
+      scale_x_continuous(message, labels = data$severity, breaks = data$severity)
 
     if (!is.null(group_labels)) {
       p <- p + scale_color_manual(labels = group_labels,
