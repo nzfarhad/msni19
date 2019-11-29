@@ -60,7 +60,7 @@ index_chart <- function(df,
   if (language == "en") {
     index_labels <- c("Extreme", "Severe", "Stress", "Minimal")
   } else if (language == "fr") {
-    index_labels <- c("Extrême", "Sévère", "Stress", "Minimale")
+    index_labels <- c("Extrême", "Sévère", "Stress", "Minimal")
   }
   if (index_type == "msni") {
     index_labels <- paste(index_labels, c("(4)", "(3)", "(2)", "(1)"))
