@@ -59,7 +59,7 @@ radar_graph <- function(df,
       ungroup()
 
     if (!is.null(group_order)) {
-      data <- arrange(data, match(group_order, group))
+      data <- arrange(data, match(group, group_order))
     } else {
       data <- arrange(data, group)
     }
