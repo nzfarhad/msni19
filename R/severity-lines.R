@@ -105,7 +105,7 @@ severity_lines <- function(df,
       theme_minimal() +
       theme(legend.position = "none") +
       scale_y_continuous("", labels = function(x) scales::percent(x, accuracy = 1)) +
-      scale_x_continuous("# of sectors", labels = data$severity, breaks = data$severity) +
+      scale_x_continuous(message, labels = data$severity, breaks = data$severity) +
       scale_color_manual(values = c("#EE5859",
                                     "#58585A",
                                     "#D1D3D4",
