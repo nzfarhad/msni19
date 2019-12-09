@@ -27,7 +27,7 @@ sunburst <- function(df, cols, labels, parents, weighting_function = NULL, color
   percents <- round(100 * (data_vector / data_vector[center]), digits = 0)
 
   # Getting integers from the data that sum up to parents integer perfectly, otherwise plotly silently fails
-  data <- mutate_all(data, round, 0) %>% unlist
+  data <- mutate_all(data, non_zero_round) %>% unlist
 
   for (i in names(data)) {
     if (i %in% parents) {
@@ -47,6 +47,13 @@ sunburst <- function(df, cols, labels, parents, weighting_function = NULL, color
   labels[-center] <- paste0(labels[-center], "<br>", percents[-center], "%")
   plot_ly(ids = cols, parents = parents, values = data, labels = labels, type = "sunburst", branchvalues = "total") %>%
     layout(colorway = colors)
+}
+
+#' Helper function for sunbursts to not round to 0 for plot_ly input, since it only takes integer values
+non_zero_round <- function(x) {
+  y <- round(x, 0)
+  y[x != 0 & y == 0] <- 1
+  y
 }
 
 #' Create sunburst for MSNI components
