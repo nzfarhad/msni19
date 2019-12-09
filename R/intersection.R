@@ -6,7 +6,9 @@
 #' @param index_filter numeric vector where index will get 1s if in the filter, and 0s otherwise
 #' @param weighting_function function for weighting the data frame
 #' @param nintersects number of intersections to include in the plot
-#' @param exclude_unique whether the set intersections should include singular sete. Note that if this is set to True, the total set size on the left will be wrong
+#' @param exclude_unique whether the set intersections should include singular sets. Note that if this is set to True, the total set size on the left will be wrong
+#' @param mutually_exclusive_sets whether
+#' @param round_to_1_percent whether to round the values
 #' @param print_plot logical column indicating whether or not to save the plot to PDF
 #' @param plot_name name to save plot with
 #' @param path path to save plot to if not in current working directory
@@ -58,6 +60,8 @@ index_intersections <- function(df,
                               weighting_function = weighting_function,
                               nintersects = nintersects,
                               exclude_unique = exclude_unique,
+                              mutually_exclusive_sets = mutually_exclusive_sets,
+                              round_to_1_percent = round_to_1_percent,
                               label = y_label)
     print(p)
     dev.off()
@@ -68,7 +72,7 @@ index_intersections <- function(df,
                          weighting_function = weighting_function,
                          nintersects = nintersects,
                          exclude_unique = exclude_unique,
-                         mututally_exclusive_sets = mutually_exclusive_sets,
+                         mutually_exclusive_sets = mutually_exclusive_sets,
                          round_to_1_percent = round_to_1_percent,
                          label = y_label)
   }
