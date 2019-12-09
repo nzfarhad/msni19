@@ -4,8 +4,17 @@
 \alias{msni}
 \title{Calculate the MSNI for 2019}
 \usage{
-msni(education_lsg, fsl_lsg, health_lsg, protection_lsg, shelter_lsg,
-  wash_lsg, capacity_gaps, impact, ...)
+msni(
+  education_lsg,
+  fsl_lsg,
+  health_lsg,
+  protection_lsg,
+  shelter_lsg,
+  wash_lsg,
+  capacity_gaps,
+  impact,
+  ...
+)
 }
 \arguments{
 \item{education_lsg}{vector of sectoral living standard gap score (1-4 or 1-5)}

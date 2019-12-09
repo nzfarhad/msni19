@@ -4,15 +4,24 @@
 \alias{radar_graph}
 \title{Create radar graph for LSG scores}
 \usage{
-radar_graph(df, lsg = c("education_lsg", "shelter_lsg", "fsl_lsg",
-  "health_lsg", "nutrition_lsg", "protection_lsg", "wash_lsg"),
-  lsg_labels = c("Education in\\nEmergency",
-  "Emergency Shelter\\nand NFI", "Food Security and\\nAgriculture",
-  "Health", "Nutrition", "Protection", "WASH"), group = NULL,
-  group_order = NULL, group_labels = NULL, weighting_function = NULL,
-  legend_position = "right", legend_text_size = 10,
-  label_text_size = 4, print_plot = F, plot_name = "radar_graph",
-  path = NULL)
+radar_graph(
+  df,
+  lsg = c("education_lsg", "shelter_lsg", "fsl_lsg", "health_lsg", "nutrition_lsg",
+    "protection_lsg", "wash_lsg"),
+  lsg_labels = c("Education in\\nEmergency", "Emergency Shelter\\nand NFI",
+    "Food Security and\\nAgriculture", "Health", "Nutrition", "Protection", "WASH"),
+  group = NULL,
+  group_order = NULL,
+  group_labels = NULL,
+  weighting_function = NULL,
+  legend_position = "right",
+  legend_text_size = 10,
+  label_text_size = 4,
+  print_plot = F,
+  plot_name = "radar_graph",
+  path = NULL,
+  index_threshold = 3
+)
 }
 \arguments{
 \item{df}{MSNA data}
@@ -40,6 +49,8 @@ radar_graph(df, lsg = c("education_lsg", "shelter_lsg", "fsl_lsg",
 \item{plot_name}{name to save plot with}
 
 \item{path}{path to save plot to if not in current working directory}
+
+\item{index_threshold}{sectoral index threshold to graph percentage greater than (default=3)}
 }
 \description{
 Create radar graph for LSG scores

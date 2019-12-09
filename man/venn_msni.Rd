@@ -4,10 +4,16 @@
 \alias{venn_msni}
 \title{Create venn diagram of living standards gaps >= 3 and capacity gaps >= 3}
 \usage{
-venn_msni(df, lsg = c("education_lsg", "shelter_lsg", "fsl_lsg",
-  "health_lsg", "nutrition_lsg", "protection_lsg", "wash_lsg"),
-  capacity_gaps = "capacity_gaps", weighting_function = NULL,
-  print_plot = F, plot_name = "venn", path = NULL)
+venn_msni(
+  df,
+  lsg = c("education_lsg", "shelter_lsg", "fsl_lsg", "health_lsg", "nutrition_lsg",
+    "protection_lsg", "wash_lsg"),
+  capacity_gaps = "capacity_gaps",
+  weighting_function = NULL,
+  print_plot = F,
+  plot_name = "venn",
+  path = NULL
+)
 }
 \arguments{
 \item{df}{MSNA data}

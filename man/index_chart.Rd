@@ -4,10 +4,21 @@
 \alias{index_chart}
 \title{Create chart of severity scores for MSNI or other indices, either stacked bar or line}
 \usage{
-index_chart(df, group = "group", group_order = NULL,
-  group_labels = NULL, index = "msni", index_max = 4,
-  index_type = "msni", weighting_function = NULL, bar_graph = T,
-  print_plot = F, plot_name = "severity_bar_chart", path = NULL)
+index_chart(
+  df,
+  group = "group",
+  group_order = NULL,
+  group_labels = NULL,
+  index = "msni",
+  index_max = 4,
+  index_type = "msni",
+  weighting_function = NULL,
+  bar_graph = T,
+  print_plot = F,
+  plot_name = "severity_bar_chart",
+  path = NULL,
+  language = "en"
+)
 }
 \arguments{
 \item{df}{MSNA data}
@@ -33,6 +44,8 @@ index_chart(df, group = "group", group_order = NULL,
 \item{plot_name}{name to save plot with}
 
 \item{path}{path to save plot to if not in current working directory}
+
+\item{language}{value of "en" or "fr" to indicate if the text on the graph is in English or French}
 }
 \description{
 Create chart of severity scores for MSNI or other indices, either stacked bar or line

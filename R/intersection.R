@@ -35,6 +35,8 @@ index_intersections <- function(df,
                                 weighting_function = NULL,
                                 nintersects = 12,
                                 exclude_unique = T,
+                                mututally_exclusive_sets = T,
+                                round_to_1_percent = F,
                                 print_plot = F,
                                 plot_name = "intersection",
                                 path = NULL) {
@@ -66,6 +68,8 @@ index_intersections <- function(df,
                          weighting_function = weighting_function,
                          nintersects = nintersects,
                          exclude_unique = exclude_unique,
+                         mututally_exclusive_sets = mutually_exclusive_sets,
+                         round_to_1_percent = round_to_1_percent,
                          label = y_label)
   }
 }

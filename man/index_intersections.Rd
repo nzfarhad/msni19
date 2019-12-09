@@ -4,14 +4,23 @@
 \alias{index_intersections}
 \title{Create intersection graph for indices in certain range of values}
 \usage{
-index_intersections(df, lsg = c("education_lsg", "shelter_lsg",
-  "fsl_lsg", "health_lsg", "nutrition_lsg", "protection_lsg", "wash_lsg"),
-  lsg_labels = c("Education", "Shelter", "Food", "Health", "Nutrition",
-  "Protection", "WASH"),
+index_intersections(
+  df,
+  lsg = c("education_lsg", "shelter_lsg", "fsl_lsg", "health_lsg", "nutrition_lsg",
+    "protection_lsg", "wash_lsg"),
+  lsg_labels = c("Education", "Shelter", "Food", "Health", "Nutrition", "Protection",
+    "WASH"),
   y_label = "\% in need per combination of sectors",
-  index_filter = c(3, 4, 5), weighting_function = NULL,
-  nintersects = 12, exclude_unique = T, print_plot = F,
-  plot_name = "intersection", path = NULL)
+  index_filter = c(3, 4, 5),
+  weighting_function = NULL,
+  nintersects = 12,
+  exclude_unique = T,
+  mututally_exclusive_sets = T,
+  round_to_1_percent = F,
+  print_plot = F,
+  plot_name = "intersection",
+  path = NULL
+)
 }
 \arguments{
 \item{df}{data frame}

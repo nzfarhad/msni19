@@ -4,11 +4,19 @@
 \alias{severity_lines}
 \title{Create line graph to show households by # of sector severity scores 3 and over}
 \usage{
-severity_lines(df, lsg = c("education_lsg", "shelter_lsg", "fsl_lsg",
-  "health_lsg", "nutrition_lsg", "protection_lsg", "wash_lsg"),
-  group = NULL, group_order = NULL, group_labels = NULL,
-  weighting_function = NULL, print_plot = F,
-  plot_name = "severity_lines", path = NULL)
+severity_lines(
+  df,
+  lsg = c("education_lsg", "shelter_lsg", "fsl_lsg", "health_lsg", "nutrition_lsg",
+    "protection_lsg", "wash_lsg"),
+  group = NULL,
+  group_order = NULL,
+  group_labels = NULL,
+  weighting_function = NULL,
+  print_plot = F,
+  plot_name = "severity_lines",
+  path = NULL,
+  language = "en"
+)
 }
 \arguments{
 \item{df}{MSNA data}
@@ -26,6 +34,8 @@ severity_lines(df, lsg = c("education_lsg", "shelter_lsg", "fsl_lsg",
 \item{plot_name}{name to save plot with}
 
 \item{path}{path to save plot to if not in current working directory}
+
+\item{language}{value of "en" or "fr" to indicate if the text on the graph is in English or French}
 
 \item{lsg_labels}{character vector of all labels for LSG indices}
 }

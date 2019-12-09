@@ -4,8 +4,15 @@
 \alias{sunburst}
 \title{Creates sunburst from binary columns}
 \usage{
-sunburst(df, cols, labels, parents, weighting_function = NULL, colors,
-  na.rm = T)
+sunburst(
+  df,
+  cols,
+  labels,
+  parents,
+  weighting_function = NULL,
+  colors,
+  na.rm = T
+)
 }
 \arguments{
 \item{df}{data frame}

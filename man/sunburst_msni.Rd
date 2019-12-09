@@ -4,14 +4,26 @@
 \alias{sunburst_msni}
 \title{Create sunburst for MSNI components}
 \usage{
-sunburst_msni(df, msni = "msni", fsl_lsg = "fsl_lsg",
-  health_lsg = "health_lsg", protection_lsg = "protection_lsg",
-  shelter_lsg = "shelter_lsg", wash_lsg = "wash_lsg",
-  capacity_gaps = "capacity_gaps", impact = "impact",
-  msni_filter = c(3, 4, 5), weighting_function = NULL,
-  fsl_wash_branch = F, health_prot_shelt_branch = F,
-  impact_branch = F, print_plot = F, plot_name = "sunburst",
-  path = NULL)
+sunburst_msni(
+  df,
+  msni = "msni",
+  fsl_lsg = "fsl_lsg",
+  health_lsg = "health_lsg",
+  protection_lsg = "protection_lsg",
+  shelter_lsg = "shelter_lsg",
+  wash_lsg = "wash_lsg",
+  capacity_gaps = "capacity_gaps",
+  impact = "impact",
+  msni_filter = c(3, 4, 5),
+  weighting_function = NULL,
+  fsl_wash_branch = F,
+  health_prot_shelt_branch = F,
+  impact_branch = F,
+  print_plot = F,
+  plot_name = "sunburst",
+  path = NULL,
+  language = "en"
+)
 }
 \arguments{
 \item{df}{MSNA data}
@@ -45,6 +57,8 @@ sunburst_msni(df, msni = "msni", fsl_lsg = "fsl_lsg",
 \item{plot_name}{name to save plot with}
 
 \item{path}{path to save plot to if not in current working directory}
+
+\item{language}{value of "en" or "fr" to indicate if the text on the graph is in English or French}
 
 \item{health_prot_shelter_branch}{if TRUE, displays 3rd branch layer for H/P/S scores}
 }
