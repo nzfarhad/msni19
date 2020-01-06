@@ -104,7 +104,7 @@ sunburst_msni <- function(df,
 
   data <- df %>% filter(!!sym(msni) %in% msni_filter) %>%
     mutate(msni = rep(1, nrow(.)),
-              fsl_cause = ifelse(!!sym(fsl_lsg) %in% msni_filter, 1, 0),
+           fsl_cause = ifelse(!!sym(fsl_lsg) %in% msni_filter, 1, 0),
            wash_cause = ifelse(!!sym(wash_lsg) %in% msni_filter, 1, 0),
            health_cause = ifelse(!!sym(health_lsg) %in% msni_filter, 1, 0),
            protection_cause = ifelse(!!sym(protection_lsg) %in% msni_filter, 1, 0),
@@ -141,7 +141,7 @@ sunburst_msni <- function(df,
   }
 
   parents <- c("", "msni", "msni", "msni", "msni")
-  colors <- c("#EE5859", "#D2CBB8", "#D1D3D4", "#585859")
+  colors <- c("#EE5859", "#D2CBB8", "#EE5859", "#585859")
 
   if (fsl_wash_branch) {
     cols <- c(cols, "fsl_cause", "wash_cause", "fsl_wash_cause")
@@ -177,12 +177,12 @@ sunburst_msni <- function(df,
   }
 
   p <- sunburst(data,
-           cols = cols,
-           labels = labels,
-           parents = parents,
-           weighting_function = weighting_function,
-           colors = colors,
-           na.rm = T)
+                cols = cols,
+                labels = labels,
+                parents = parents,
+                weighting_function = weighting_function,
+                colors = colors,
+                na.rm = T)
 
   if (print_plot) {
     if (!is.null(path)) {
