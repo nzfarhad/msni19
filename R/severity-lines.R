@@ -74,7 +74,7 @@ severity_lines <- function(df,
       theme_minimal() +
       theme(legend.title = element_blank()) +
       scale_y_continuous("", labels = function(x) scales::percent(x, accuracy = 1)) +
-      scale_x_continuous(message, labels = data$severity, breaks = data$severity)
+      scale_x_continuous(x_axis_labs, labels = data$severity, breaks = data$severity)
 
     if (!is.null(group_labels)) {
       p <- p + scale_color_manual(labels = group_labels,
@@ -105,7 +105,7 @@ severity_lines <- function(df,
       theme_minimal() +
       theme(legend.position = "none") +
       scale_y_continuous("", labels = function(x) scales::percent(x, accuracy = 1)) +
-      scale_x_continuous(message, labels = data$severity, breaks = data$severity) +
+      scale_x_continuous(x_axis_labs, labels = data$severity, breaks = data$severity) +
       scale_color_manual(values = c("#EE5859",
                                     "#58585A",
                                     "#D1D3D4",
