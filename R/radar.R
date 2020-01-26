@@ -57,14 +57,15 @@ radar_graph <- function(df,
     data <- bind_cols(select(df, !! sym(group)), data) %>%
       rename(group = !! sym(group)) %>%
       ungroup()
-
+    
     if (!is.null(group_order)) {
       data <- arrange(data, match(group, group_order))
     } else {
       data <- arrange(data, group)
     }
-
+    data <- data %>% ungroup(group)
     if (!is.null(group_labels)) {
+      
       data <- mutate(data, group = group_labels)
     }
     data <- mutate(data, group = factor(group, levels = group))
